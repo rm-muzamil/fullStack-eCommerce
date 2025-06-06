@@ -14,7 +14,10 @@ async function createCart(user) {
 
 async function findUserCart(userId) {
   try {
-    let cart = await Cart.findOne({ user: user });
+    let cart = await Cart.findOne({ user: userId });
+    if (!cart) {
+      return null; // or return an empty cart or throw an error as per your design
+    }
     let cartItems = await CartItem.find({ cart: cart._id }).populate("product");
     cart.cartItems = cartItems;
 
@@ -28,7 +31,7 @@ async function findUserCart(userId) {
       totalItem += cartItem.quantity;
     }
     cart.totalPrice = totalPrice;
-    cart.totalItem = totalItem;
+    cart.totalUtem = totalItem;
     cart.discounte = totalPrice - totalDiscountedPrice;
 
     return cart;
@@ -40,7 +43,14 @@ async function findUserCart(userId) {
 async function addCartItem(userId, req) {
   try {
     const cart = await Cart.findOne({ user: userId });
+    if (!cart) {
+      cart = new Cart({ user: userId });
+      cart = await cart.save();
+    }
     const product = await Product.findById(req.productId);
+    if (!product) {
+      throw new Error("Product not found");
+    }
     const isPresent = await CartItem.findOne({
       cart: cart._id,
       product: product._id,
@@ -61,6 +71,8 @@ async function addCartItem(userId, req) {
       cart.cartItems.push(createsCartItem);
       await cart.save();
       return "Item added to Cart";
+    } else {
+      return "Item already exists in cart";
     }
   } catch (error) {
     throw new Error(error.message);

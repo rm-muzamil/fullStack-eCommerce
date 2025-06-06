@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const orderSchema = mongoose.Schema({
+const orderSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
@@ -44,7 +44,7 @@ const orderSchema = mongoose.Schema({
   },
   totalDiscountedPrice: {
     type: Number,
-    required: true,
+    // required: true,
   },
   discounte: {
     type: Number,
@@ -57,7 +57,7 @@ const orderSchema = mongoose.Schema({
   },
   totalItem: {
     type: Number,
-    required: true,
+    // required: true,
   },
   createdAt: {
     type: Date,

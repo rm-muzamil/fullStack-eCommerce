@@ -1,6 +1,7 @@
 const Address = require("../models/address.model.js");
 const cartService = require("../services/cart.service.js");
 const Order = require("../models/order.model.js");
+const OrderItem = require("../models/orderItem.model.js");
 
 async function createOrder(user, shipAddress) {
   let address;
@@ -12,6 +13,10 @@ async function createOrder(user, shipAddress) {
     address.user = user;
     await address.save();
 
+    if (!user.addresses) {
+      user.addresses = []; // ✅ Fix: ensure it's an array
+    }
+
     user.addresses.push(address);
     await user.save();
   }
@@ -19,7 +24,7 @@ async function createOrder(user, shipAddress) {
   const orderItems = [];
 
   for (const item of cart.cartItems) {
-    const orderItem = new orderItems({
+    const orderItem = new OrderItem({
       price: item.price,
       product: item.product,
       quantity: item.quantity,
@@ -39,7 +44,7 @@ async function createOrder(user, shipAddress) {
     totalItem: cart.totalItem,
     shipAddress: address,
   });
-  const savedOrder = await createOrder.save();
+  const savedOrder = await createdOrder.save();
   return savedOrder;
 }
 async function placeOrder(orderId) {

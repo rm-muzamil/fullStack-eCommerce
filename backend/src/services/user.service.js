@@ -8,7 +8,7 @@ const createUser = async (userData) => {
     const isUserExist = await User.findOne({ email });
 
     if (isUserExist) {
-      throw new Error("user already exist with email :", email);
+      throw new Error(`User already exists with email: ${email}`);
     }
     password = await bcrypt.hash(password, 8);
 
@@ -26,7 +26,7 @@ const findUserById = async (userId) => {
     const user = await User.findById(userId);
     // .populate("address");
     if (!user) {
-      throw new Error("user not found with id : ", userId);
+      throw new Error(`User not found with id: ${userId}`);
     }
     return user;
   } catch (error) {
@@ -37,7 +37,7 @@ const getUserByEmail = async (email) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      throw new Error("user not found with Email : ", email);
+      throw new Error(`User not found with Email: ${email}`);
     }
     return user;
   } catch (error) {
@@ -46,15 +46,19 @@ const getUserByEmail = async (email) => {
 };
 const getUserProfileByToken = async (token) => {
   try {
+    console.log("🔐 Decoding token:", token);
     const userId = jwtProvider.getUserIdFromToken(token);
+    console.log("🆔 Decoded user ID:", userId);
     const user = await findUserById(userId);
+    console.log("✅ Fetched user:", user);
     if (!user) {
-      throw new Error("user not found with id : ", userId);
+      throw new Error(`User not found with id: ${userId}`);
     }
     console.log("user", user);
 
     return user;
   } catch (error) {
+    console.error("❌ Error in getUserProfileByToken:", error);
     throw new Error(error.message);
   }
 };
