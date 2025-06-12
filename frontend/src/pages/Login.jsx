@@ -34,13 +34,11 @@ function Login() {
         <a className='rigs' href="#" onClick={()=>setIslogin(true)}>Login</a>
     </div>
     </>}
-
-
     <nav className='buttom2'>
+      <Link to="/Login">Login</Link>
   <Link to="/Home">Home</Link>
 <Link to="/Dashboard">Dashboard</Link>
 <Link to="/Login">Login</Link>
-
 </nav>
     </div>
   );

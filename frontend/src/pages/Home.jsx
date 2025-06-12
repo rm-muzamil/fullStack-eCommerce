@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Outlet,Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import ProductModal from './ProductModal';
+import Login from './Login';
 
 function Home() {
   const[home,setHome]=useState([])
@@ -20,10 +21,11 @@ function Home() {
 
  const handelbuy = (id) => {
     navigate(`/product/${id}`);
+    
   };
-  const hclcik=()=>{
-    navigate(`/About`)
-  }
+
+
+
   return(
   
 
@@ -45,7 +47,7 @@ function Home() {
 </header>
 <div className='containerbar'>
 <nav className='navbar'>
-  <img onClick={hclcik} className='icon' src="https://img.icons8.com/?size=100&id=mBkyWceUPlkM&format=png&color=000000" />
+  <img className='icon' src="https://img.icons8.com/?size=100&id=mBkyWceUPlkM&format=png&color=000000" />
  <img  className='icon' src="https://img.icons8.com/?size=100&id=y1jile6KU9QN&format=png&color=000000" />
  <img className='icon' src="https://cdn-icons-png.flaticon.com/128/18900/18900088.png" alt="" />
  <img className='icon' src="https://cdn-icons-png.flaticon.com/128/3098/3098405.png" alt="" />
@@ -70,23 +72,13 @@ function Home() {
       </div>
     </li>
   ))
-
-  
 }
 </div>
-
-
-
 <nav className='buttom'>
   <Link to="/Home">Home</Link>
 <Link to="/Dashboard">Dashboard</Link>
 <Link to="/Login">Login</Link>
-
 </nav>
-
-
-
-
   </div> 
 
   )

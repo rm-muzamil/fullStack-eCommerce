@@ -72,10 +72,7 @@ function Dashboard() {
    <Link to="/Home">Home</Link>
   <Link to="/Dashboard">Dashboard</Link>
 <Link to="/Login">Login</Link>
-
 </nav>
-
-
 <ul className="hello">
   <li className="hel">
     <p>Total Sale</p>
