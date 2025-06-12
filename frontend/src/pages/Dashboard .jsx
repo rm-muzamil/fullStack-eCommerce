@@ -72,8 +72,7 @@ function Dashboard() {
    <Link to="/Home">Home</Link>
   <Link to="/Dashboard">Dashboard</Link>
 <Link to="/Login">Login</Link>
-<Link to="/Cart">Cart</Link>
-<Link to="/About">About</Link>
+
 </nav>
 
 

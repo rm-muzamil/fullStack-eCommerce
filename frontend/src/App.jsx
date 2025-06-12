@@ -9,20 +9,21 @@ import About from './pages/About';
 import Dashboard from './pages/Dashboard ';
 import Login from './pages/Login';
 import Cart from './pages/Cart';
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
   return (
     <>
       {/* <Greeting /> */}
       <Routes>
-        
+          <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/" element={<Greeting/>} />
         <Route path="/home" element={<Home />} />
-        <Route path="/about" element={<About />} />
+       
         <Route path="/dashboard" element={<Dashboard/>} /> 
         <Route path="/login" element={<Login/>} /> 
-  <Route path="/cart" element={<Cart/>} /> 
-        
+
+       <Route path="/ProductDetail" element={<ProductDetail/>} />   
       </Routes>
     </>
   );
